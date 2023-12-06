@@ -25,6 +25,9 @@ export const reducerState = createSlice({
     },
     delFavorite: (state, action) => {
       state.favorites = state.favorites.filter((el) => el !== action.payload);
+    },
+    delData: (state, action) => {
+      state.data = [];
     }
   },
   extraReducers: builder => {
@@ -34,7 +37,8 @@ export const reducerState = createSlice({
         })
           .addCase(fetchDatas.fulfilled, (state, action) => {
               state.isLoading = false;
-              state.data = action.payload;
+            // state.data = action.payload;
+              state.data = [...state.data, ...action.payload];
               state.error = null;
         })
           .addCase(fetchDatas.rejected, (state, action) => {
@@ -50,7 +54,8 @@ export const {
   decrement,
   incrementByAmount,
   addFavorite,
-  delFavorite
+  delFavorite,
+  delData
 } = reducerState.actions
 // export const reducer = combineReducers({cars: reducerState.reducer})
 export default reducerState.reducer

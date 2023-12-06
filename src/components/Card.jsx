@@ -98,7 +98,7 @@ const BtnLM = styled.button`
 const CardZone = styled.div`
 
 `;
-export const Card = ({ elem }) => {
+export const Card = ({ elem, setModal }) => {
     const addr = elem.address.split(',');
     const dispatch = useDispatch();
     const favoriteItem = useSelector(favorites);
@@ -108,7 +108,6 @@ export const Card = ({ elem }) => {
         else dispatch(addFavorite(id));
 
     }
-    
     return (
         <>  
             <CardDiv>
@@ -142,7 +141,7 @@ export const Card = ({ elem }) => {
                     
                 </InfoDiv>
                 </CardZone>
-                <BtnLM>
+                <BtnLM onClick={()=>setModal(elem)}>
                     Learn more
                 </BtnLM>
             </CardDiv>
