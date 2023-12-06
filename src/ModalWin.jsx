@@ -92,7 +92,15 @@ const RentalCon = styled.p`
     color:#121417;
 `;
 const InfoSpanRen = styled.span`
-    
+    font-size: 12px;
+    font-weight: 400;
+    color:#363535;
+    background-color: #F9F9F9;
+    /* background-color: lightblue; */
+    padding: 7px 14px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border-radius: 15px;
 `;
 const SvgX = styled.svg`
     display: inline-block;
@@ -105,10 +113,30 @@ const SvgX = styled.svg`
     stroke: currentColor;
     fill: currentColor;
 `;
+const Age = styled.span`
+    font-size: 12px;
+    font-weight: 600;
+    color: #3470FF;
+`;
+const BtnRC = styled.button`
+    width: 168px;
+    height: 44px;
+    background-color: #3470FF;
+    color:white;
+    border-radius: 20px;
+    border: none;
+    &:hover{
+        background-color: #0B44CD;
+        border: 1px solid #0B44CD;
+    }
+`;
 export const ModalWin = ({ onClose, valueModal }) => {
-    console.log(valueModal)
     const addr = valueModal.address.split(',');
     const rentCon = valueModal.rentalConditions.split('\n');
+    const zal = parseInt(valueModal.mileage) % 1000;
+    const c = Math.trunc(parseInt(valueModal.mileage) / 1000);
+    const price = parseInt(valueModal.rentalPrice.match(/\d+/));
+    console.log(price)
     return (
         <>
             <Overlay>
@@ -147,11 +175,21 @@ export const ModalWin = ({ onClose, valueModal }) => {
                     </AccesFuncDiv>
                     <RentalCon>Rental Conditions:</RentalCon>
                     <AccesFuncDiv>
-                        {rentCon.map((el, i) => { return <InfoSpanRen key={i + 200}>{el}</InfoSpanRen> })}
-                        <InfoSpanRen>Mileage: {valueModal.mileage}</InfoSpanRen>
-                        <InfoSpanRen>Price: {valueModal.rentalPrice}</InfoSpanRen>
+                       {rentCon.map((el, i) => {
+                            if (el.match(/\d+/)) {
+                                const age = el.match(/\d+/);
+                                const str = el.match(/\D/g).join('');
+                                return <InfoSpanRen key={i + 200}>{str}<Age>{age}</Age></InfoSpanRen>
+                            }
+                            else return <InfoSpanRen key={i + 200}>{el}</InfoSpanRen>
+                        })}
+                        {
+                        
+                        }
+                        <InfoSpanRen>Mileage: <Age>{c+','+zal}</Age></InfoSpanRen>
+                        <InfoSpanRen>Price: <Age>{price}$</Age></InfoSpanRen>
                     </AccesFuncDiv>
-                    
+                    <BtnRC>Rental car</BtnRC>
                 </Modal>
             </Overlay>
             
