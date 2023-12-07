@@ -13,7 +13,7 @@ const Overlay = styled.div`
 `;
 const Modal = styled.div`
     position: relative;
-    padding: 40px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -42,7 +42,7 @@ const ModalYear = styled.span`
 
 `;
 const InfoDivTitle = styled.div`
-    margin-top: 18px;
+    margin-top: 10px;
     margin-bottom: 8px;
 `;
 const InfoDiv = styled.div`
@@ -62,7 +62,8 @@ const InfoSpan = styled.span`
     }
 `;
 const DescribeDiv = styled.p`
-    margin-top: 14px;
+    margin-top: 10px;
+    margin-bottom: 0;
     max-width: 461px;
     font-size: 14px;
     font-weight: 400;
@@ -70,7 +71,7 @@ const DescribeDiv = styled.p`
 
 `;
 const AccessoriesDiv = styled.p`
-    margin-top: 14px;
+    margin-top: 15px;
     margin-bottom: 8px;
     max-width: 461px;
     font-size: 14px;
@@ -99,14 +100,17 @@ const InfoSpanRen = styled.span`
     /* background-color: lightblue; */
     padding: 7px 14px;
     margin-right: 8px;
-    margin-bottom: 8px;
+    &:not(:nth-child(n+4)){
+        margin-bottom: 8px;
+
+    }
     border-radius: 15px;
 `;
 const SvgX = styled.svg`
     display: inline-block;
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 10px;
+    right: 10px;
     width: 24px;
     height: 24px;
     stroke-width: 0;
@@ -119,6 +123,7 @@ const Age = styled.span`
     color: #3470FF;
 `;
 const BtnRC = styled.button`
+    margin: 15px 0 0 0;
     width: 168px;
     height: 44px;
     background-color: #3470FF;
@@ -136,7 +141,6 @@ export const ModalWin = ({ onClose, valueModal }) => {
     const zal = parseInt(valueModal.mileage) % 1000;
     const c = Math.trunc(parseInt(valueModal.mileage) / 1000);
     const price = parseInt(valueModal.rentalPrice.match(/\d+/));
-    console.log(price)
     return (
         <>
             <Overlay>

@@ -29,7 +29,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/search" element={<SearchList setModal={handlerModal}/>} />
-        <Route path="/favorite" element={<Favorite />} />
+        <Route path="/favorite" element={<Favorite setModal={handlerModal}/>} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

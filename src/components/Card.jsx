@@ -104,8 +104,17 @@ export const Card = ({ elem, setModal }) => {
     const favoriteItem = useSelector(favorites);
     const fillFavorite = favoriteItem.includes(elem.id) ? { stroke: "#3470FF", fill: "#3470FF" } : { stroke: "white", fill: "none" };
     function handlerSvgCl(id) {
-        if (favoriteItem.includes(id)) dispatch(delFavorite(id));
-        else dispatch(addFavorite(id));
+        if (favoriteItem.includes(id)) {
+            dispatch(delFavorite(id));
+            const fav = localStorage.getItem('fav');
+            localStorage.setItem('fav', fav.split(',').filter((el) => +el !== id).join(','))
+        }
+        else {
+            dispatch(addFavorite(id));
+            const fav = localStorage.getItem('fav');
+            
+            localStorage.setItem('fav', (fav ? !fav.includes(id.toString()) && (fav.toString() + ',' + id.toString()) : id.toString()))
+        }
 
     }
     return (

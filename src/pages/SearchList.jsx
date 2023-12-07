@@ -4,6 +4,7 @@ import { Card } from "../components/card";
 import { data } from "../redux/selectors";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { addFavorite } from "../redux/redusers";
 
 const Container = styled.div`
     margin-left: auto;
@@ -31,10 +32,12 @@ const LoadMore = styled.a`
 export const SearchList = ({setModal}) => {
     const pageL = localStorage.getItem('page');
     const [page, setPage] = useState(Number(pageL) || 2);
+    const favLS = localStorage.getItem('fav');
     useEffect(() => {
         dispatch(fetchDatas())
         localStorage.setItem('page',2);
         setPage(2);
+        if (favLS) favLS.split(',').map(el=>dispatch(addFavorite(Number(el))));
     }, [])
     const cards = useSelector(data);
     const dispatch = useDispatch();
