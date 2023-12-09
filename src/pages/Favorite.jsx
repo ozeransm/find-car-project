@@ -7,9 +7,7 @@ import styled from "styled-components";
 import { addFavorite } from "../redux/redusers";
 
 const Container = styled.div`
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
+    margin: 50px auto 100px auto;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
