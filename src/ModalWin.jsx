@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import x from "../img/x.svg";
+import sprite from "../img/sprite.svg";
 const Overlay = styled.div`
     position: fixed;
     display: flex;
@@ -146,7 +146,7 @@ export const ModalWin = ({ onClose, valueModal }) => {
             <Overlay>
                 <Modal>
                     <SvgX onClick={onClose}>
-                        <use xlinkHref={x+"#icon-x"}></use>
+                        <use xlinkHref={sprite+"#icon-x"}></use>
                     </SvgX>
                     
                     <ModalImg src={valueModal.img} />

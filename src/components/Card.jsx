@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import like from "../../img/like.svg";
 import { useDispatch, useSelector } from 'react-redux';
 import { favorites } from '../redux/selectors';
 import { addFavorite, delFavorite } from '../redux/redusers';
-
+import sprite from "../../img/sprite.svg";
 const CardDiv = styled.div`
     width: 274px;
     height: 426px;
@@ -123,7 +122,7 @@ export const Card = ({ elem, setModal }) => {
                 <CardZone>
                 <CardImg>
                     <SvgImh onClick={() => handlerSvgCl(elem.id)} style={ fillFavorite }>
-                        <use xlinkHref={like+"#icon-Vector"}></use>
+                        <use xlinkHref={sprite+"#icon-like"}></use>
                     </SvgImh>
                     <Img src={elem.img} />
                 </CardImg>

@@ -21,7 +21,6 @@ export const Favorite = ({ setModal }) => {
     const favLS = localStorage.getItem('fav');
     
     useEffect(() => {
-        dispatch(fetchDatas({ limit: 30 }));
         if (favLS) favLS.split(',').map(el=>dispatch(addFavorite(Number(el)))); 
        
     }, [])
@@ -29,7 +28,6 @@ export const Favorite = ({ setModal }) => {
     const fav = useSelector(favorites);
     return (
         <>
-            <h2>Favorite</h2>
             <Container>
                 {cards.map((el) => fav.includes(el.id) && <Card key={el.id} elem={el} setModal={setModal} />)}
             </Container>

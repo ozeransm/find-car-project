@@ -8,6 +8,8 @@ import { createGlobalStyle } from "styled-components"
 import { ModalWin } from "./ModalWin"
 import { useState } from "react"
 import { createPortal } from "react-dom"
+import { Contacts } from "./pages/Contacts"
+import { Admin } from "./pages/Admin"
 
 const GlobalStyle = createGlobalStyle`
 
@@ -29,7 +31,9 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/search" element={<SearchList setModal={handlerModal}/>} />
-        <Route path="/favorite" element={<Favorite setModal={handlerModal}/>} />
+        <Route path="/favorite" element={<Favorite setModal={handlerModal} />} />
+        <Route path="/contacts" element={<Contacts />} /> 
+        <Route path="/admin" element={<Admin/>}/>  
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

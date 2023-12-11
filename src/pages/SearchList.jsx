@@ -33,7 +33,9 @@ export const SearchList = ({setModal}) => {
     const pageL = localStorage.getItem('page');
     const [page, setPage] = useState(Number(pageL) || 2);
     const favLS = localStorage.getItem('fav');
+    const search = localStorage.getItem('search');
     useEffect(() => {
+        console.log(search);
         dispatch(fetchDatas())
         localStorage.setItem('page',2);
         setPage(2);
@@ -48,10 +50,9 @@ export const SearchList = ({setModal}) => {
         dispatch(fetchDatas({ page }))
         
     }
-
+    
     return (
         <>
-            <h2>SearchList</h2>
             <Container>
                 {cards.map((el) => <Card key={el.id} elem={el} setModal={setModal} />)}
             </Container>
