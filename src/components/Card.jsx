@@ -79,6 +79,19 @@ const SvgImh = styled.svg`
     right: 15px;
        
 `;
+const SvgImhEdit = styled.svg`
+    width: 28px; 
+    height: 26px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    fill: lightgray;
+    &:hover{
+        width: 33px;
+        height: 31px;
+        fill: #3470FF;
+    }   
+`;
 const BtnLM = styled.button`
     width: 100%;
     height: 44px;
@@ -116,6 +129,7 @@ export const Card = ({ elem, setModal }) => {
         }
 
     }
+   
     return (
         <>  
             <CardDiv>
@@ -124,6 +138,9 @@ export const Card = ({ elem, setModal }) => {
                     <SvgImh onClick={() => handlerSvgCl(elem.id)} style={ fillFavorite }>
                         <use xlinkHref={sprite+"#icon-like"}></use>
                     </SvgImh>
+                    <SvgImhEdit onClick={() => setModal(elem, 'Edit')} >
+                        <use xlinkHref={sprite+"#icon-pen"}></use>
+                    </SvgImhEdit>    
                     <Img src={elem.img} />
                 </CardImg>
                 <TitleDiv>

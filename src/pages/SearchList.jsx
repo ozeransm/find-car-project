@@ -35,8 +35,9 @@ export const SearchList = ({setModal}) => {
     const favLS = localStorage.getItem('fav');
     const search = localStorage.getItem('search');
     useEffect(() => {
-        console.log(search);
-        dispatch(fetchDatas())
+        const objSearch = JSON.parse(search);
+        console.log(objSearch);
+        dispatch(fetchDatas(objSearch || {}));
         localStorage.setItem('page',2);
         setPage(2);
         if (favLS) favLS.split(',').map(el=>dispatch(addFavorite(Number(el))));

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchDatas } from "../redux/operation";
 import { Card } from "../components/card";
 import { data, favorites } from "../redux/selectors";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { addFavorite } from "../redux/redusers";
 
@@ -22,7 +22,7 @@ export const Favorite = ({ setModal }) => {
     
     useEffect(() => {
         if (favLS) favLS.split(',').map(el=>dispatch(addFavorite(Number(el)))); 
-       
+        dispatch(fetchDatas({ limit: 30 }));
     }, [])
     const cards = useSelector(data);
     const fav = useSelector(favorites);

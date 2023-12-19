@@ -7,7 +7,7 @@ export const fetchDatas = createAsyncThunk(
        
             try {
                 const response = await fetchData(param);
-                return response.data;
+                return response.data.cars;
             } catch (error) {
                 return thunkAPI.rejectWithValue(error.message);
             }

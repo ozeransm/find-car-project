@@ -21,7 +21,10 @@ body {
 function App() {
   const [isModal, setIsModal] = useState(false);
   const [valueModal, setValueModal] = useState({});
-  const handlerModal = (val) => {
+  const [isEdit, setIsEdit] = useState(false);
+  const handlerModal = (val, flagEdit) => {
+    if (flagEdit === 'Edit') setIsEdit(true)
+      else setIsEdit(false);
     setValueModal({ ...val });
     setIsModal(true);
   }
@@ -30,14 +33,14 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/search" element={<SearchList setModal={handlerModal}/>} />
+          <Route path="/search" element={<SearchList setModal={handlerModal} />} />
         <Route path="/favorite" element={<Favorite setModal={handlerModal} />} />
         <Route path="/contacts" element={<Contacts />} /> 
         <Route path="/admin" element={<Admin/>}/>  
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
-      {isModal && createPortal(<ModalWin onClose={() => setIsModal(false)} valueModal={valueModal} />, document.getElementById('modal'))}  
+      {isModal && createPortal(<ModalWin onClose={() => setIsModal(false)} valueModal={valueModal} isEdit={isEdit}/>, document.getElementById('modal'))}  
     </>
   )
 }

@@ -198,8 +198,8 @@ export const Layout = () => {
     const [arrowPrice, setArrowPrice] = useState("#icon-down");
     const [option, setOption] = useState("Enter the text");
     const [priceFilter, setPriceFilter] = useState("To $");
-    const [milageFrom, setMilageFrom] = useState();
-    const [milageTo, setMilageTo] = useState();
+    const [mileageFrom, setMilageFrom] = useState("");
+    const [mileageTo, setMilageTo] = useState("");
     const [nav, setNav] = useState();
     const navigation = useNavigate();
     const price = [];
@@ -232,6 +232,7 @@ export const Layout = () => {
     }
     function handlerBtnLike(e) {
         e.preventDefault();
+        dispatch(delData());
         navigation("*");
         setNav("/favorite");
     }
@@ -268,12 +269,20 @@ export const Layout = () => {
           
     }
     useEffect(() => {
-        localStorage.setItem('search', JSON.stringify({ option, priceFilter, milageFrom, milageTo }));
+        const newOption = option !== "Enter the text" ? option : "";
+        const newPriceFilter = priceFilter !== "To $" ? priceFilter : "";
+        
+        localStorage.setItem('search', JSON.stringify(
+            {
+                make: newOption,
+                rentalPrice: newPriceFilter,
+                mileageFrom,
+                mileageTo
+            }));
         navigation(nav);
-    }, [option, priceFilter, milageFrom, milageTo, navigation])
-    console.log(nav);
+    }, [option, priceFilter, mileageFrom, mileageTo, navigation])
     return (
-        <>
+        <> 
             <GroupNav>
                 <BtnLike onClick={handlerBtnHome}>
                 <SvgImh style={{width:"32px", height:"32px"}}>
@@ -306,12 +315,10 @@ export const Layout = () => {
                 Enter
                 </BtnLike>
             </GroupNav>
-            <form onSubmit={handlerBtnSearch}> 
+            <form onSubmit={handlerBtnSearch}>
             <Container>
-            
             <GroupDiv>
             <LabelSel >Car brand</LabelSel>
-            
                 <BrandSelect onClick={handlerBrandSelect}>
                 <TextBrandSel>{option}</TextBrandSel>       
                 <SvgDown >
@@ -332,23 +339,22 @@ export const Layout = () => {
                 </SvgDownPrice>
                 </BrandSelectPrice >
                     <MenuSelectPrice style={arrowPrice === "#icon-down" ? { visibility: "hidden" } : { visibility: "visible" }}>
-                        {price.map((el, i) => <TextMenuSel key={i + 15} onClick={() => { setPriceFilter(el);setArrowPrice("#icon-down") }}>{el}</TextMenuSel>)}        
+                        {price.map((el, i) => <TextMenuSel key={i + 15} onClick={() => { setPriceFilter('$'+el);setArrowPrice("#icon-down") }}>{el}</TextMenuSel>)}        
                             
                 </MenuSelectPrice>
             </GroupDiv>
-                      
-            <GroupDiv>   
+            <GroupDiv>
             <LabelSel >Сar mileage / km</LabelSel>
                 <GroupDivMilage>
-                            <BrandSelectMilage name="from" value={milageFrom} placeholder="From" onChange={(e)=>setMilageFrom(e.target.value)} onFocus={handlerOnFocus}/>
-                            <BrandSelectMilage name="to" value={milageTo} placeholder="To" onChange={(e)=>setMilageTo(e.target.value)} onFocus={handlerOnFocus}/>
-                </GroupDivMilage>
+                    <BrandSelectMilage value={mileageFrom} placeholder="From" onChange={(e)=>setMilageFrom(e.target.value)} onFocus={handlerOnFocus}/>
+                    <BrandSelectMilage value={mileageTo} placeholder="To" onChange={(e)=>setMilageTo(e.target.value)} onFocus={handlerOnFocus}/>
+               </GroupDivMilage>
             </GroupDiv>
             <GroupDiv >    
                 <BtnSearch>Search</BtnSearch> 
             </GroupDiv >
             </Container>
-                </form>         
+            </form>       
             <Outlet />
         </>
     )
